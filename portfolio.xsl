@@ -54,8 +54,10 @@
                             </p>
                         </div>
                         <div class="photo-placeholder">
-                            <img src="{concat('static/img/', /portfolio/photo)}" alt="ZB"/>
-                        </div>
+                            <img src="{concat('static/img/', /portfolio/photo)}"
+                                 alt="ZB"
+                                 style="width: 120px; height: 120px; object-fit: cover; border-radius: 12px;"/>
+                                               </div>
                         </div>
                     
                     <div class="nav-buttons">
