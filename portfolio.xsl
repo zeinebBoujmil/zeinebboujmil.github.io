@@ -54,7 +54,7 @@
                             </p>
                         </div>
                         <div class="photo-placeholder">
-                            <img src="{concat('static/img/', photo)}" alt="ZB"/>
+                            <img src="{concat('static/img/', /portfolio/photo)}" alt="ZB"/>
                         </div>
                         </div>
                     
