@@ -29,10 +29,10 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], $languages)) {
 
 // Charger XML et XSL
 $xml = new DOMDocument;
-$xml->load("portfolio.xml");
+$xml->load(__DIR__ . '/../portfolio.xml');
 
 $xsl = new DOMDocument;
-$xsl->load("portfolio.xsl");
+$xsl->load(__DIR__ . '/../portfolio.xsl');
 
 // Configurer transformation
 $proc = new XSLTProcessor;
