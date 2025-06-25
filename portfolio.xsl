@@ -76,9 +76,6 @@
                         <button class="nav-btn" onclick="showSection('contact')">
                             <xsl:value-of select="//sections/contact/*[name()=$lang]"/>
                         </button>
-                        <button class="nav-btn" onclick="showSection('video')">
-                            Vidéo
-                        </button>
                         
                         
  
@@ -197,20 +194,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Vidéo -->
-                    <div id="video" class="section">
-                        <h2>Présentation vidéo</h2>
-                        <div class="video-wrapper">
-                            <iframe width="560" height="315"
-                                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                                    title="Présentation"
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen>
-                                </iframe>
-                        </div>
-                    </div>
-
+                    
                     
                 </div>
                 
