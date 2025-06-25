@@ -9,6 +9,8 @@
     <xsl:param name="lang" select="'fr'"/>
     
     <xsl:template match="/">
+        <xsl:text disable-output-escaping="yes"><!DOCTYPE html></xsl:text>
+
         <html lang="{$lang}" prefix="foaf: http://xmlns.com/foaf/0.1/ dc: http://purl.org/dc/elements/1.1/">
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
