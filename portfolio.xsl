@@ -56,7 +56,7 @@
                         <div class="photo-placeholder">
                             <img src="{concat('static/img/', /portfolio/photo)}"
                                  alt="ZB"
-                                 style="width: 180px; height: 180px; object-fit: cover; border-radius: 16px;"/>
+                                 style="width: 200px; height: 200px; object-fit: cover; border-radius: 16px;"/>
                                                </div>
                         </div>
                     
