@@ -3,207 +3,145 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
-                exclude-result-prefixes="foaf dc">
+                xmlns:cv="http://rdfs.org/resume-rdf/cv.rdfs#"
+                xmlns:schema="http://schema.org/"
+                exclude-result-prefixes="foaf dc cv schema">
     
     <xsl:output method="html" encoding="UTF-8" indent="yes"/>
     <xsl:param name="lang" select="'fr'"/>
     
     <xsl:template match="/">
-        <html lang="{$lang}" prefix="foaf: http://xmlns.com/foaf/0.1/ dc: http://purl.org/dc/elements/1.1/">
+        <html lang="{$lang}"
+              prefix="foaf: http://xmlns.com/foaf/0.1/ dc: http://purl.org/dc/elements/1.1/ cv: http://rdfs.org/resume-rdf/cv.rdfs# schema: http://schema.org/">
             <head>
                 <meta charset="UTF-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-                <title>Portfolio – <xsl:value-of select="//foaf:name"/></title>
-                
-                <!-- Recommandation SEO multilingue -->
-                <link rel="alternate" hreflang="fr" href="?lang=fr"/>
-                <link rel="alternate" hreflang="en" href="?lang=en"/>
-                <link rel="alternate" hreflang="zh" href="?lang=zh"/>
+                <title>Portfolio – <xsl:value-of select="//foaf:name/*[name()=$lang]"/></title>
                 <link rel="stylesheet" type="text/css" href="style.css"/>
-
-
             </head>
             
             <body typeof="foaf:Person" about="#me">
-                <form method="get" class="language-selector">
-                    <button type="submit" name="lang" value="fr">
-                        <span style="color: #0055A4;">●</span><span style="color: #FFFFFF;">●</span><span style="color: #EF4135;">●</span> FR
-                    </button>
-                    <button type="submit" name="lang" value="en">
-                        <span style="color: #012169;">●</span><span style="color: #FFFFFF;">●</span><span style="color: #C8102E;">●</span> EN
-                    </button>
-                    <button type="submit" name="lang" value="zh">
-                        <span style="color: #DE2910;">●</span><span style="color: #FFDE00;">●</span><span style="color: #DE2910;">●</span> 中文
-                    </button>
-                </form>
+                <h1 property="foaf:name">
+                    <xsl:value-of select="//foaf:name/*[name()=$lang]"/>
+                </h1>
                 
+                <p property="foaf:title">
+                    <xsl:value-of select="//foaf:title/*[name()=$lang]"/>
+                </p>
                 
-                <div class="container">
-                    
-                    <!-- Hero -->
-                    <div class="hero">
-                        
-                        <div class="hero-content">
-                            <h1 property="foaf:name">
-                                <xsl:value-of select="//foaf:name/*[name()=$lang]"/>
-                            </h1>
-                                                        <p class="subtitle" property="foaf:title">
-                                <xsl:value-of select="//foaf:title/*[name()=$lang]"/>
-                            </p>
-                        </div>
-                        <div class="photo-placeholder">
-                            <img src="{concat('static/img/', photo)}" />
-
-                        </div>
-                                              </div>
-                    
-                    <div class="nav-buttons">
-                        <button class="nav-btn" onclick="showSection('experience')">
-                            <xsl:value-of select="//sections/experience/*[name()=$lang]"/>
-                        </button>
-                        <button class="nav-btn" onclick="showSection('projects')">
-                            <xsl:value-of select="//sections/projects/*[name()=$lang]"/>
-                        </button>
-                        <button class="nav-btn" onclick="showSection('education')">
-                            <xsl:value-of select="//sections/education/*[name()=$lang]"/>
-                        </button>
-                        <button class="nav-btn" onclick="showSection('languages')">
-                            <xsl:value-of select="//sections/languages/*[name()=$lang]"/>
-                        </button>
-                        <button class="nav-btn" onclick="showSection('skills')">
-                            <xsl:value-of select="//sections/skills/*[name()=$lang]"/>
-                        </button>
-                        <button class="nav-btn" onclick="showSection('contact')">
-                            <xsl:value-of select="//sections/contact/*[name()=$lang]"/>
-                        </button>
-                        
- 
-                    </div>
-                                            
-                    
-                    <!-- Expériences -->
-                    <div id="experience" class="section">
-                        <h2><xsl:value-of select="//sections/experience/*[name()=$lang]"/></h2>
-
-                            <xsl:for-each select="//experiences/experience">
-                            <div class="experience-item">
-                                <div class="date" property="dc:date">
+                <!-- Experiences -->
+                <section>
+                    <h2>Expériences</h2>
+                    <xsl:for-each select="//experiences/experience">
+                        <div rel="cv:hasExperience">
+                            <div typeof="cv:Experience">
+                                <span property="dc:date">
                                     <xsl:value-of select="dc:date"/>
-                                </div>
-                                <div class="company">
+                                </span><br/>
+                                <span property="cv:employer">
                                     <xsl:value-of select="employer"/>
-                                </div>
-                                <div class="job-title">
+                                </span><br/>
+                                <span property="dc:title">
                                     <xsl:value-of select="title/*[name()=$lang]"/>
-                                </div>
-                                
-                                <div class="description" property="dc:description">
+                                </span><br/>
+                                <span property="dc:description">
                                     <xsl:value-of select="dc:description/*[name()=$lang]"/>
-                                </div>
+                                </span>
                             </div>
-                        </xsl:for-each>
-                    </div>
-                    
-                    <!-- Projets -->
-                    <div id="projects" class="section">
-                        <h2><xsl:value-of select="//sections/projects/*[name()=$lang]"/></h2>
-
-                            <xsl:for-each select="//projects/project">
-                            <div class="project-item">
-                                <div class="project-title" property="dc:title">
+                        </div>
+                    </xsl:for-each>
+                </section>
+                
+                <!-- Projects -->
+                <section>
+                    <h2>Projets</h2>
+                    <xsl:for-each select="//projects/project">
+                        <div rel="schema:hasPart">
+                            <div typeof="schema:Project">
+                                <span property="dc:title">
                                     <xsl:value-of select="dc:title/*[name()=$lang]"/>
-                                </div>
-                                <div class="description" property="dc:description">
+                                </span><br/>
+                                <span property="dc:description">
                                     <xsl:value-of select="dc:description/*[name()=$lang]"/>
-                                </div>
+                                </span>
                             </div>
-                        </xsl:for-each>
-                    </div>
-                    
-                    <!-- Formation -->
-                    <div id="education" class="section">
-                        <h2><xsl:value-of select="//sections/education/*[name()=$lang]"/></h2>
-
-                            <xsl:for-each select="//education/diploma">
-                            <div class="education-item">
-                                <div class="date" property="dc:date">
+                        </div>
+                    </xsl:for-each>
+                </section>
+                
+                <!-- Education -->
+                <section>
+                    <h2>Formation</h2>
+                    <xsl:for-each select="//education/diploma">
+                        <div rel="cv:hasEducation">
+                            <div typeof="cv:Education">
+                                <span property="dc:date">
                                     <xsl:value-of select="dc:date"/>
-                                </div>
-                                <div class="company" property="dc:title">
+                                </span><br/>
+                                <span property="dc:title">
                                     <xsl:value-of select="dc:title/*[name()=$lang]"/>
-                                </div>
-                                <div class="description" property="dc:description">
+                                </span><br/>
+                                <span property="dc:description">
                                     <xsl:value-of select="dc:description/*[name()=$lang]"/>
-                                </div>
+                                </span>
                             </div>
-                        </xsl:for-each>
-                    </div>
-                    
-                    <!-- Langues -->
-                    <div id="languages" class="section">
-                        <h2><xsl:value-of select="//sections/languages/*[name()=$lang]"/></h2>
-
-                            <xsl:for-each select="//languages/language">
-                            <div class="language-item">
-                                <span class="language-name" property="foaf:name">
+                        </div>
+                    </xsl:for-each>
+                </section>
+                
+                <!-- Languages -->
+                <section>
+                    <h2>Langues</h2>
+                    <xsl:for-each select="//languages/language">
+                        <div rel="cv:hasLanguage">
+                            <div typeof="cv:Language">
+                                <span property="foaf:name">
                                     <xsl:value-of select="foaf:name/*[name()=$lang]"/>
                                 </span>
-                                <span class="language-level">
+                                -
+                                <span property="cv:level">
                                     <xsl:value-of select="level/*[name()=$lang]"/>
                                 </span>
                             </div>
-                        </xsl:for-each>
-
-                    </div>
-                    
-                    <!-- Compétences -->
-                    <div id="skills" class="section">
-                        <h2><xsl:value-of select="//sections/skills/*[name()=$lang]"/></h2>
-
-                            <div class="skills-grid">
-                            <xsl:for-each select="//skills/skill">
-                                <div class="skill-item">
-                                    <xsl:value-of select="."/>
-                                </div>
-                            </xsl:for-each>
                         </div>
-                    </div>
-                    
-                    <!-- Contact -->
-                    <div id="contact" class="section">
-                        <h2><xsl:value-of select="//sections/contact/*[name()=$lang]"/></h2>
-
-                            <div class="contact-grid">
-                            <div class="contact-item">
-                                <span property="foaf:phone">
-                                    <xsl:value-of select="//contact/foaf:phone"/>
-                                </span>
-                            </div>
-                            <div class="contact-item">
-                                <span property="foaf:mbox">
-                                    <xsl:value-of select="//contact/foaf:mbox"/>
-                                </span>
-                            </div>
-                            <div class="contact-item">
-                                <a property="foaf:homepage">
-                                    <xsl:attribute name="href">
-                                        <xsl:value-of select="//contact/foaf:homepage"/>
-                                    </xsl:attribute>
-                                    LinkedIn
-                                </a>
-                            </div>
-                            <div class="contact-item">
-                                <span property="foaf:based_near">
-                                    <xsl:value-of select="//contact/foaf:based_near/*[name()=$lang]"/>
-                                </span>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+                    </xsl:for-each>
+                </section>
                 
-                <!-- JS pour les sections -->
+                <!-- Skills -->
+                <section>
+                    <h2>Compétences</h2>
+                    <xsl:for-each select="//skills/skill">
+                        <div rel="cv:hasSkill">
+                            <span property="cv:skill">
+                                <xsl:value-of select="."/>
+                            </span>
+                        </div>
+                    </xsl:for-each>
+                </section>
+                
+                <!-- Contact -->
+                <section>
+                    <h2>Contact</h2>
+                    <div>
+                        <span property="foaf:phone">
+                            <xsl:value-of select="//contact/foaf:phone"/>
+                        </span><br/>
+                        <span property="foaf:mbox">
+                            <xsl:value-of select="//contact/foaf:mbox"/>
+                        </span><br/>
+                        <a property="foaf:homepage">
+                            <xsl:attribute name="href">
+                                <xsl:value-of select="//contact/foaf:homepage"/>
+                            </xsl:attribute>
+                            LinkedIn
+                        </a><br/>
+                        <span property="foaf:based_near">
+                            <xsl:value-of select="//contact/foaf:based_near/*[name()=$lang]"/>
+                        </span>
+                    </div>
+                </section>
+                
+                
                 <script>
                     function showSection(sectionId) {
                     const sections = document.querySelectorAll('.section');
