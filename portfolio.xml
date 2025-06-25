@@ -20,7 +20,7 @@
                 目前，我在 SFR 公司进行交替实习，不断提升自己的计算机与工程技能。</zh>
         </foaf:title>
     </foaf:Person>
-    
+    <photo>zeineb.jpg</photo>
     <experiences>
         <experience>
             <dc:date>09/2024 - 09/2026</dc:date>
