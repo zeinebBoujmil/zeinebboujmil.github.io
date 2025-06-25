@@ -4,12 +4,12 @@
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                 exclude-result-prefixes="foaf dc">
-    
+    <xsl:output method="html" encoding="UTF-8" doctype-system="about:legacy-compat"/>
+
     <xsl:output method="html" encoding="UTF-8" indent="yes"/>
     <xsl:param name="lang" select="'fr'"/>
     
     <xsl:template match="/">
-        <xsl:text disable-output-escaping="yes"><![CDATA[<!DOCTYPE html>]]></xsl:text>
 
         <html lang="{$lang}" prefix="foaf: http://xmlns.com/foaf/0.1/ dc: http://purl.org/dc/elements/1.1/">
             <head>
