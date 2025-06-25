@@ -29,15 +29,21 @@ if (isset($_GET['lang']) && in_array($_GET['lang'], $languages)) {
 
 // Charger XML et XSL
 $xml = new DOMDocument;
-$xml->load(__DIR__ . '/../portfolio.xml');
+$xml->load(__DIR__ . '/../portfolio.xml'); // ⚠️ adapte le chemin si besoin
 
 $xsl = new DOMDocument;
-$xsl->load(__DIR__ . '/../portfolio.xsl');
+$xsl->load(__DIR__ . '/../portfolio.xsl'); // ⚠️ adapte le chemin si besoin
 
-// Configurer transformation
+// Appliquer la transformation XSLT
 $proc = new XSLTProcessor;
 $proc->importStylesheet($xsl);
 $proc->setParameter('', 'lang', $lang);
 
-// Afficher le HTML transformé
-echo $proc->transformToXML($xml);
+$html = $proc->transformToXML($xml);
+
+// Ajout sécurisé du doctype si nécessaire
+if (strpos($html, '<!DOCTYPE html>') === false) {
+    $html = '<!DOCTYPE html>' . "\n" . $html;
+}
+
+echo $html;
