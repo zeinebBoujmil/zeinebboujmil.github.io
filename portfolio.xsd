@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:foaf="http://xmlns.com/foaf/0.1/"
-           xmlns:dc="http://purl.org/dc/elements/1.1/"
            elementFormDefault="qualified">
     
-    <!-- Type personnalisé pour contenu multilingue -->
+    <!-- Type multilingue -->
     <xs:complexType name="multilangText">
         <xs:sequence>
             <xs:element name="fr" type="xs:string" minOccurs="0"/>
@@ -17,14 +15,8 @@
     <xs:element name="portfolio">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="foaf:Person">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="foaf:name" type="multilangText"/>
-                            <xs:element name="foaf:title" type="multilangText"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element name="Person" type="PersonType"/>
+                <xs:element name="photo" type="xs:string"/>
                 
                 <xs:element name="experiences">
                     <xs:complexType>
@@ -32,10 +24,10 @@
                             <xs:element name="experience" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="dc:date" type="xs:string"/>
+                                        <xs:element name="date" type="xs:string"/>
                                         <xs:element name="employer" type="xs:string"/>
                                         <xs:element name="title" type="multilangText"/>
-                                        <xs:element name="dc:description" type="multilangText"/>
+                                        <xs:element name="description" type="multilangText"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -49,8 +41,8 @@
                             <xs:element name="project" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="dc:title" type="multilangText"/>
-                                        <xs:element name="dc:description" type="multilangText"/>
+                                        <xs:element name="title" type="multilangText"/>
+                                        <xs:element name="description" type="multilangText"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -64,9 +56,9 @@
                             <xs:element name="diploma" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="dc:date" type="xs:string"/>
-                                        <xs:element name="dc:title" type="multilangText"/>
-                                        <xs:element name="dc:description" type="multilangText"/>
+                                        <xs:element name="date" type="xs:string"/>
+                                        <xs:element name="title" type="multilangText"/>
+                                        <xs:element name="description" type="multilangText"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -80,7 +72,7 @@
                             <xs:element name="language" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="foaf:name" type="multilangText"/>
+                                        <xs:element name="name" type="multilangText"/>
                                         <xs:element name="level" type="multilangText"/>
                                     </xs:sequence>
                                 </xs:complexType>
@@ -113,15 +105,24 @@
                 <xs:element name="contact">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="foaf:phone" type="xs:string"/>
-                            <xs:element name="foaf:mbox" type="xs:string"/>
-                            <xs:element name="foaf:homepage" type="xs:anyURI"/>
-                            <xs:element name="foaf:based_near" type="multilangText"/>
+                            <xs:element name="phone" type="xs:string"/>
+                            <xs:element name="mbox" type="xs:string"/>
+                            <xs:element name="homepage" type="xs:string"/>
+                            <xs:element name="based_near" type="multilangText"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    
+    <!-- Type Person -->
+    <xs:complexType name="PersonType">
+        <xs:sequence>
+            <xs:element name="name" type="multilangText"/>
+            <xs:element name="title" type="multilangText"/>
+        </xs:sequence>
+    </xs:complexType>
     
 </xs:schema>
