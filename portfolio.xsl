@@ -11,7 +11,7 @@
     <xsl:template match="/">
         <html lang="{$lang}" prefix="foaf: http://xmlns.com/foaf/0.1/ dc: http://purl.org/dc/elements/1.1/">
             <head>
-                <meta charset="UTF-8"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
                 <title>Portfolio – <xsl:value-of select="//foaf:name"/></title>
                 
@@ -47,15 +47,15 @@
                             <h1 property="foaf:name">
                                 <xsl:value-of select="//foaf:name/*[name()=$lang]"/>
                             </h1>
-                                                        <p class="subtitle" property="foaf:title">
+                            <p class="subtitle" property="foaf:title">
                                 <xsl:value-of select="//foaf:title/*[name()=$lang]"/>
                             </p>
                         </div>
                         <div class="photo-placeholder">
-                            <img src="{concat('static/img/', photo)}" />
+                            <img src="{concat('static/img/', photo)}" alt="ZB"/>
 
                         </div>
-                                              </div>
+                        </div>
                     
                     <div class="nav-buttons">
                         <button class="nav-btn" onclick="showSection('experience')">
