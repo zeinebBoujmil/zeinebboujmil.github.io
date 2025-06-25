@@ -9,32 +9,19 @@
         <xs:sequence>
             <xs:element name="fr" type="xs:string" minOccurs="0"/>
             <xs:element name="en" type="xs:string" minOccurs="0"/>
-            <xs:element name="es" type="xs:string" minOccurs="0"/>
+            <xs:element name="zh" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
     
+    <!-- Élément racine -->
     <xs:element name="portfolio">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="foaf:Person"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    
-    <!-- foaf:Person -->
-    <xs:element name="Person" xmlns:foaf="http://xmlns.com/foaf/0.1/">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
-                <xs:element name="title" type="multilangText"/>
-                
-                <xs:element name="contact">
+                <xs:element name="foaf:Person">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="phone" type="xs:string"/>
-                            <xs:element name="mbox" type="xs:string"/>
-                            <xs:element name="homepage" type="xs:anyURI"/>
-                            <xs:element name="based_near" type="xs:string"/>
+                            <xs:element name="foaf:name" type="multilangText"/>
+                            <xs:element name="foaf:title" type="multilangText"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -45,10 +32,10 @@
                             <xs:element name="experience" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element ref="dc:date"/>
+                                        <xs:element name="dc:date" type="xs:string"/>
                                         <xs:element name="employer" type="xs:string"/>
-                                        <xs:element name="title" type="xs:string"/>
-                                        <xs:element ref="dc:description"/>
+                                        <xs:element name="title" type="multilangText"/>
+                                        <xs:element name="dc:description" type="multilangText"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -62,8 +49,8 @@
                             <xs:element name="project" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element ref="dc:title"/>
-                                        <xs:element ref="dc:description"/>
+                                        <xs:element name="dc:title" type="multilangText"/>
+                                        <xs:element name="dc:description" type="multilangText"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -77,9 +64,9 @@
                             <xs:element name="diploma" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element ref="dc:date"/>
-                                        <xs:element ref="dc:title"/>
-                                        <xs:element ref="dc:description"/>
+                                        <xs:element name="dc:date" type="xs:string"/>
+                                        <xs:element name="dc:title" type="multilangText"/>
+                                        <xs:element name="dc:description" type="multilangText"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -93,8 +80,8 @@
                             <xs:element name="language" maxOccurs="unbounded">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="name" type="xs:string"/>
-                                        <xs:element name="level" type="xs:string"/>
+                                        <xs:element name="foaf:name" type="multilangText"/>
+                                        <xs:element name="level" type="multilangText"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -110,13 +97,31 @@
                     </xs:complexType>
                 </xs:element>
                 
+                <xs:element name="sections">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="experience" type="multilangText"/>
+                            <xs:element name="projects" type="multilangText"/>
+                            <xs:element name="education" type="multilangText"/>
+                            <xs:element name="languages" type="multilangText"/>
+                            <xs:element name="skills" type="multilangText"/>
+                            <xs:element name="contact" type="multilangText"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:element name="contact">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="foaf:phone" type="xs:string"/>
+                            <xs:element name="foaf:mbox" type="xs:string"/>
+                            <xs:element name="foaf:homepage" type="xs:anyURI"/>
+                            <xs:element name="foaf:based_near" type="multilangText"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    
-    <!-- Dublin Core multilingue -->
-    <xs:element name="title" xmlns:dc="http://purl.org/dc/elements/1.1/" type="multilangText"/>
-    <xs:element name="description" xmlns:dc="http://purl.org/dc/elements/1.1/" type="multilangText"/>
-    <xs:element name="date" xmlns:dc="http://purl.org/dc/elements/1.1/" type="xs:string"/>
     
 </xs:schema>
