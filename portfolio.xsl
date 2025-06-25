@@ -84,19 +84,17 @@
                     <!-- Expériences -->
                     <div id="experience" class="section">
                         <h2><xsl:value-of select="//sections/experience/*[name()=$lang]"/></h2>
-
-                            <xsl:for-each select="//experiences/experience">
-                            <div class="experience-item">
+                        <xsl:for-each select="//experiences/experience">
+                            <div class="experience-item" typeof="schema:WorkExperience">
                                 <div class="date" property="dc:date">
                                     <xsl:value-of select="dc:date"/>
                                 </div>
-                                <div class="company">
+                                <div class="company" property="schema:worksFor">
                                     <xsl:value-of select="employer"/>
                                 </div>
-                                <div class="job-title">
+                                <div class="job-title" property="schema:jobTitle">
                                     <xsl:value-of select="title/*[name()=$lang]"/>
                                 </div>
-                                
                                 <div class="description" property="dc:description">
                                     <xsl:value-of select="dc:description/*[name()=$lang]"/>
                                 </div>
@@ -107,9 +105,8 @@
                     <!-- Projets -->
                     <div id="projects" class="section">
                         <h2><xsl:value-of select="//sections/projects/*[name()=$lang]"/></h2>
-
-                            <xsl:for-each select="//projects/project">
-                            <div class="project-item">
+                        <xsl:for-each select="//projects/project">
+                            <div class="project-item" typeof="schema:CreativeWork">
                                 <div class="project-title" property="dc:title">
                                     <xsl:value-of select="dc:title/*[name()=$lang]"/>
                                 </div>
@@ -123,9 +120,8 @@
                     <!-- Formation -->
                     <div id="education" class="section">
                         <h2><xsl:value-of select="//sections/education/*[name()=$lang]"/></h2>
-
-                            <xsl:for-each select="//education/diploma">
-                            <div class="education-item">
+                        <xsl:for-each select="//education/diploma">
+                            <div class="education-item" typeof="schema:EducationalOccupationalCredential">
                                 <div class="date" property="dc:date">
                                     <xsl:value-of select="dc:date"/>
                                 </div>
@@ -142,38 +138,36 @@
                     <!-- Langues -->
                     <div id="languages" class="section">
                         <h2><xsl:value-of select="//sections/languages/*[name()=$lang]"/></h2>
-
-                            <xsl:for-each select="//languages/language">
-                            <div class="language-item">
+                        <xsl:for-each select="//languages/language">
+                            <div class="language-item" typeof="schema:Language">
                                 <span class="language-name" property="foaf:name">
                                     <xsl:value-of select="foaf:name/*[name()=$lang]"/>
                                 </span>
-                                <span class="language-level">
+                                <span class="language-level" property="schema:proficiencyLevel">
                                     <xsl:value-of select="level/*[name()=$lang]"/>
                                 </span>
                             </div>
                         </xsl:for-each>
-
                     </div>
+                    
                     
                     <!-- Compétences -->
                     <div id="skills" class="section">
                         <h2><xsl:value-of select="//sections/skills/*[name()=$lang]"/></h2>
-
-                            <div class="skills-grid">
+                        <div class="skills-grid">
                             <xsl:for-each select="//skills/skill">
-                                <div class="skill-item">
+                                <div class="skill-item" property="schema:skill">
                                     <xsl:value-of select="."/>
                                 </div>
                             </xsl:for-each>
                         </div>
                     </div>
                     
+                    
                     <!-- Contact -->
                     <div id="contact" class="section">
                         <h2><xsl:value-of select="//sections/contact/*[name()=$lang]"/></h2>
-
-                            <div class="contact-grid">
+                        <div class="contact-grid">
                             <div class="contact-item">
                                 <span property="foaf:phone">
                                     <xsl:value-of select="//contact/foaf:phone"/>
@@ -196,10 +190,10 @@
                                 <span property="foaf:based_near">
                                     <xsl:value-of select="//contact/foaf:based_near/*[name()=$lang]"/>
                                 </span>
-                                
                             </div>
                         </div>
                     </div>
+                    
                     
                 </div>
                 
