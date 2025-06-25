@@ -4,7 +4,7 @@
                 xmlns:foaf="http://xmlns.com/foaf/0.1/"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                 exclude-result-prefixes="foaf dc">
-    <xsl:output method="html" encoding="UTF-8" doctype-system="about:legacy-compat"/>
+    <xsl:output method="html" encoding="UTF-8" doctype-public="" doctype-system=""/>
 
     <xsl:output method="html" encoding="UTF-8" indent="yes"/>
     <xsl:param name="lang" select="'fr'"/>
